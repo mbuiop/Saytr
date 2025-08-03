@@ -29,11 +29,11 @@ for file_path in [SITES_FILE, SIGNALS_FILE, ANALYSIS_FILE]:
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.get("/sabt/", response_class=HTMLResponse)
+@app.get("/saet/", response_class=HTMLResponse)
 async def show_site_form(request: Request):
     return templates.TemplateResponse("sabt.html", {"request": request})
 
-@app.post("/sabt/submit/")
+@app.post("/saet/submit/")
 async def submit_site(
     site_name: str = Form(...),
     site_url: str = Form(...),
@@ -42,9 +42,9 @@ async def submit_site(
     with open(SITES_FILE, "a", encoding="utf-8") as f:
         f.write(f"{site_name}|{site_url}|{description}\n")
     
-    return RedirectResponse(url="/sabt/success", status_code=303)
+    return RedirectResponse(url="/saet/success", status_code=303)
 
-@app.get("/sabt/success", response_class=HTMLResponse)
+@app.get("/saet/success", response_class=HTMLResponse)
 async def show_success(request: Request):
     return templates.TemplateResponse("success.html", {"request": request})
 
